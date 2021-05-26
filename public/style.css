@@ -1,0 +1,26 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Helvetica',sans-serif;
+	text-decoration: none;
+	outline: none;
+	border:none;
+}
+
+.addForm{
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	width: 30vw;
+	height: 100%;
+	background: pink;
+}
+
+.addForm input{
+	width: 100%;
+	height: 20px;
+	padding: 5px;
+	text-transform: capitalize;
+}
+
