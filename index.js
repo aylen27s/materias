@@ -40,12 +40,12 @@ app.post('/api/materias', (request, repsonse)=>{
 		nuevaMateria.save().then( savedData=>{
 			console.log(`Nueva materia guardada
 				${savedData}`)
-			mongoose.connection.close()
+			//mongoose.connection.close()
 		})
 	}else{
 		console.error('request body sin los datos necesarios')
 	}
-	
+
 })
 
 

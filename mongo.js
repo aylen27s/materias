@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const pass = require('./pass.js')
-const dbname = 'materias'
+const dbname = 'app'
 
 const conexion = `mongodb+srv://aylen27s:${pass}@cluster0.0axqh.mongodb.net/${dbname}?retryWrites=true&w=majority`
 

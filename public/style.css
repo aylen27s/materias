@@ -1,26 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,500;0,600;1,100&display=swap');
+:root{
+	/*colores*/
+	--main:#E8DAEF;
+	--dark:#00A487;
+	--mid:#46FFA6;
+	--lt:#90FFC9;
+	--grey:#2E2E2E;
+}
 *{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'Helvetica',sans-serif;
+	font-family: 'Poppins','Helvetica',sans-serif;
 	text-decoration: none;
 	outline: none;
 	border:none;
+	font-size: 14px;
+}
+#root{
+	display: flex;
+	height: 100vh;
+	width: 100%;
+	background:var(--lt);
+}
+.nav{
+	padding:5% 15%;
+	display: flex;
+	justify-content: space-between;
 }
 
+.nav a{
+	color: var(--grey);
+}
+
+.section-a{
+	width: 25vw;
+	height:100%;
+	box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+	background:var(--main);
+	margin-left: 40px;
+	position: staic;
+}
 .addForm{
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
-	width: 30vw;
-	height: 100%;
-	background: pink;
+	padding: 15%;
+	width:100%;	
 }
-
+.addForm h2{
+	font-size: 1.5em;
+	text-align: center;
+	padding-bottom:20px;
+	color: var(--grey);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
 .addForm input{
 	width: 100%;
-	height: 20px;
+	height: 30px;
 	padding: 5px;
 	text-transform: capitalize;
+	border-radius: 2px;
+}
+.addForm input[type="text"]{
+	background: transparent;
+	border-bottom:solid 2px var(--mid)
+}
+.addForm input[type="number"]{
+	width: 50px;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+}
+.addForm input[type="checkbox"]{
+	width: initial;
+}
+.addForm input[type="date"]{
+	width: 65%;
+	font-size: 0.9em;
 }
 
+
+.addForm label{
+	font-size: 0.9em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 0px;
+	color: var(--grey);
+}
+.btn-save{
+	font-size: 0.9em;
+	height: 30px;
+	text-transform: capitalize;
+	border: solid 1px var(--mid);
+	border-radius: 2px;
+	color:var(--mid);
+	transition: 0.2s ease-in;
+}
+
+.btn-save:hover{
+	background: var(--mid);
+	color:var(--grey);
+}
+
+.section-b{
+	width:calc(75vw - 40px);
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-gap:20px;
+	padding:50px;
+	overflow-y: scroll;
+}
+
+.card{
+	height: 150px;
+	background: white;
+	border-radius: 5px;
+}
+.card header{
+	display: flex;
+	align-items: center;
+	background: transparent;	
+	height: 30px;
+	padding:15px;
+	
+}
+.card header h3{
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	width:70%;
+	background:white;
+	
+}
+
+.card header p{
+	font-size: 0.7em;
+	margin-left:10px;
+	text-transform: initial;
+	color: var(--dark);
+}
+.card div{
+	padding: 5px 15px;
+}
+.card label{
+	display: flex;
+}
+
+.card label p{
+	font-weight: 600;
+}
