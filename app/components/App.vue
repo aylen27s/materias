@@ -17,7 +17,7 @@
 			</form>
 		</div>
 		<div class="section-b">
-			<div class="card" v-for="parcial of parciales">
+			<div class="card" v-for="parcial of parciales" :key="parcial.id">
 				<header>
 					<h3>{{parcial.materia}}</h3>
 					<p>{{parcial.nroParcial}}° parcial</p>
@@ -26,9 +26,20 @@
 					<label><p>{{new Date(parcial.fecha).getDay()}}/{{new Date(parcial.fecha).getMonth()}}/{{new Date(parcial.fecha).getFullYear()}}</p></label>
 					<label>Nota <p>{{parcial.nota}}</p></label>
 					<label v-if="parcial.recuperatorio==true" class="recu">Recuperatorio</label>
+					<span>
+						<button @click="remove(parcial.id)"><i class="far fa-trash-alt icon-rmv"></i></button>
+						<button v-on:click="popUp('upd',true)"><i class="fas fa-pen-alt icon-edit"></i></button>
+					</span>
+				</div>
+				<div class="update"  id="upd">
+					<p>Actualizacion</p>
+					<button>Actualizar</button>
+					<button @click="popUp('upd',false)">Cancelar</button>
 				</div>
 			</div>
+			
 		</div>
+		
 	</div>
 	
 </template>
@@ -54,27 +65,62 @@
 			this.getParciales()
 		},
 		methods: {
+			popUp(id, state){
+				if (state)
+					document.getElementById(id).style.display = "block"
+				else
+					document.getElementById(id).style.display = "none"
+			},
 			getParciales(){
-				fetch('/api/parciales')
+				fetch('/api/parciales',{
+					method:'GET',
+					headers:{
+						'Accept':'application/json',
+						'Content-type':'application/json'						
+					}
+				})
 				.then(response => response.json())
 				.then(data => {
 					this.parciales = data
-					console.log(new Date(data[0].fecha))
+					console.log('datos obtenidos')
+					console.log(this.parciales)
 				})
 			},
-			addMateria() {
-				console.log(this.materia)
+			update(id){
+				fetch('/api/materias',{
+					method:'PUT',
+					body: JSON.stringify(this.materia)
+				})
+			},
+			remove(id){
+				console.log(id)
+				 fetch('/api/materias/' + id, {
+					method:'DELETE',
+					headers:{
+						'Accept':'application/json',
+						'Content-type':'application/json'						
+					}
+				})
+				.then(response => response.json())
+				.then(data => {
+					console.log(data)
+					this.getParciales()
+				})
 
+			},
+			addMateria() {
 				fetch('/api/materias',{
 					method: 'POST',
 					body: JSON.stringify(this.materia),
 					headers:{
-						'Content-type':'application/json',
-						'Accept':'application/json'
+						'Accept':'application/json',
+						'Content-type':'application/json'						
 					}
 				})
 				.then(response => response.json())
-				.then(data => console.log(data))
+				.then(data => {
+					this.getParciales()
+				})
 
 				this.materia = new Materia()
 			}

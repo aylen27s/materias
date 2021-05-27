@@ -148,3 +148,28 @@
 .card label p{
 	font-weight: 600;
 }
+
+.icon-edit, .icon-rmv{
+	color:var(--dark);
+	padding:8px;
+	border-radius: 100%;
+	box-shadow:0px 2px 5px rgba(0,0,0,0.5);
+	cursor:pointer;
+}
+
+.icon-rmv{
+	color:rgb(255, 118, 118);
+}
+
+.update{
+	width:300px;
+	height:150px;
+	text-align:center;
+	top:40%;
+	left:50%;
+	background:rgba(255,255,255,0.8);
+	display: none;
+    position: absolute;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.7);
+}
