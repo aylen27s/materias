@@ -16,9 +16,18 @@ app.get('/', (request, response)=>{
 	response.send('<h1>Calendario de Parciales</h1>')
 })
 
-app.get('/api/parciales',(request,response)=>{
+app.get('/api/materias',(request,response)=>{
 	//entre llaves: parametro de filtro
 	Materia.find({})
+	.then(materia =>{
+		response.json(materia)
+	})
+})
+
+app.get('/api/materias/:id',(request,response)=>{
+	const {id} = request.params
+	//entre llaves: parametro de filtro
+	Materia.findById({_id:id})
 	.then(materia =>{
 		response.json(materia)
 	})
