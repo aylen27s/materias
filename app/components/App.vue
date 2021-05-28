@@ -1,19 +1,15 @@
 <template>
 	<div id="root">
 		<div class="section-a">
-			<nav class="nav">
-				<a href="/">Home</a>
-				<a href="/api/parciales">Parciales</a>
-			</nav>
 			<!--prevent evita que la pagina se refresque al enviar el form-->
 			<form @submit.prevent="cargarDatos" class="addForm">
 				<h2>Nuevo parcial</h2>
 				<input type="text" placeholder="Materia" v-model="materia.nombre">
 				<label> Fecha<input type="date" v-model="materia.fecha"></label>
-				<label> Nro de parcial<input type="number" class="i-number" v-model="materia.nroParcial"></label>	
-				<label> Nota <input type="number" class="i-number" v-model="materia.nota"></label>
+				<label> Nro de parcial<input type="number" min="1" max="10" class="i-number" v-model="materia.nroParcial"></label>	
+				<label> Nota <input type="number" min="1" max="10" class="i-number" v-model="materia.nota"></label>
 				<label> Recuperatorio<input type="checkbox" v-model="materia.recu"></label>
-				<button class="btn-save">Guardar parcial</button>
+				<button class="btn">Guardar parcial</button>
 			</form>
 		</div>
 		<div class="section-b">
@@ -28,43 +24,30 @@
 					<label>Nota <p>{{parcial.nota}}</p></label>
 					<label v-if="parcial.recuperatorio==true" class="recu">Recuperatorio</label>
 					<span>
-						<button @click="remove(parcial.id)"><i class="far fa-trash-alt icon-rmv"></i></button>
-						<button @click="update(parcial.id)"><i class="fas fa-pen-alt icon-edit"></i></button>
+						<button class="btn-icon" @click="remove(parcial.id)"><i class="far fa-trash-alt icon-rmv"></i></button>
+						<button class="btn-icon" @click="update(parcial.id)"><i class="fas fa-pen-alt icon-edit"></i></button>
 					</span>
 					
 				</div>
 				
-				<!-- v-if="this.edit === true" -->
-					
-					<!-- <div class="update"  id="upd">
-						<form @submit.prevent="cargarDatos">
-							<h2>Actualizar</h2>
-							<input type="text" placeholder="Materia" v-model="materia.nombre">
-							<label> Fecha<input type="date" v-model="materia.fecha"></label>
-							<label> Nro de parcial<input type="number" class="i-number" v-model="materia.nroParcial"></label>	
-							<label> Nota <input type="number" class="i-number" v-model="materia.nota"></label>
-							<label> Recuperatorio<input type="checkbox" v-model="materia.recu"></label>
-							
-						</form>
-					</div> -->
-				
-				
 			</div>
-			
-			
 		</div>
+
 		<template v-if="edit === true">
-			<div>
-				<form @submit.prevent="cargarDatos">
+			<div class="popUp">
+				<form @submit.prevent="cargarDatos" class="updForm">
 					<h2>Actualizar</h2>
 					<input type="text" placeholder="Materia" v-model="updMateria.nombre">
 					<label> Fecha<input type="date" v-model="updMateria.fecha"></label>
 					<label> Nro de parcial<input type="number" class="i-number" v-model="updMateria.nroParcial"></label>	
 					<label> Nota <input type="number" class="i-number" v-model="updMateria.nota"></label>
 					<label> Recuperatorio<input type="checkbox" v-model="updMateria.recu"></label>
+					<footer>
+						<button class="btn act">Actualizar</button>
+						<button class="btn" @click="edit=false">Cancelar</button>
+					</footer>
+					
 				</form>
-				<button class="btn-save">Actualizar</button>
-				<button @click="edit=false">Cancelar</button>
 			</div>
 		</template>
 	</div>

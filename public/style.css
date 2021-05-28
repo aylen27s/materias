@@ -2,9 +2,10 @@
 :root{
 	/*colores*/
 	--main:#E8DAEF;
-	--dark:#00A487;
-	--mid:#46FFA6;
-	--lt:#90FFC9;
+	--dark:#00C48A;
+	--mid:#00D7B1;
+	--lt:#9FFFDE;
+	/* #90FFC9 */
 	--grey:#2E2E2E;
 }
 *{
@@ -37,7 +38,7 @@
 	width: 25vw;
 	height:100%;
 	box-shadow: 0 1px 10px rgba(0,0,0,0.5);
-	background:var(--main);
+	background:white;
 	margin-left: 40px;
 	position: staic;
 }
@@ -47,32 +48,32 @@
 	padding: 15%;
 	width:100%;	
 }
-.addForm h2{
+h2{
 	font-size: 1.5em;
 	text-align: center;
 	padding-bottom:20px;
 	color: var(--grey);
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
-.addForm input{
+input{
 	width: 100%;
 	height: 30px;
 	padding: 5px;
 	text-transform: capitalize;
 	border-radius: 2px;
 }
-.addForm input[type="text"]{
+input[type="text"]{
 	background: transparent;
 	border-bottom:solid 2px var(--mid)
 }
-.addForm input[type="number"]{
+input[type="number"]{
 	width: 50px;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.3);
 }
-.addForm input[type="checkbox"]{
+input[type="checkbox"]{
 	width: initial;
 }
-.addForm input[type="date"]{
+input[type="date"]{
 	width: 65%;
 	font-size: 0.9em;
 }
@@ -86,7 +87,8 @@
 	padding: 10px 0px;
 	color: var(--grey);
 }
-.btn-save{
+.btn{
+	padding:0px 10px;
 	font-size: 0.9em;
 	height: 30px;
 	text-transform: capitalize;
@@ -94,9 +96,10 @@
 	border-radius: 2px;
 	color:var(--mid);
 	transition: 0.2s ease-in;
+	background: transparent;
 }
 
-.btn-save:hover{
+.btn:hover{
 	background: var(--mid);
 	color:var(--grey);
 }
@@ -148,28 +151,56 @@
 .card label p{
 	font-weight: 600;
 }
-
+.btn-icon{
+	border-radius: 100%;
+}
 .icon-edit, .icon-rmv{
 	color:var(--dark);
 	padding:8px;
 	border-radius: 100%;
 	box-shadow:0px 2px 5px rgba(0,0,0,0.5);
 	cursor:pointer;
+	background: white;
 }
 
 .icon-rmv{
 	color:rgb(255, 118, 118);
 }
 
-.update{
-	width:300px;
-	height:150px;
-	text-align:center;
-	top:40%;
-	left:50%;
-	background:rgba(255,255,255,0.8);
-	display: none;
+.popUp{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.8);
     position: absolute;
-    border-radius: 5px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.updForm{
+	width:250px;
+	height:320px;
+	background: white;
+	padding:20px;
+	border-radius: 5px;
+}
+
+.updForm label{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	margin-bottom:10px;
+}
+
+.updForm footer{
+	display: flex;
+	justify-content: space-around;
+}
+
+.btn.act{
+	background:var(--lt);
+	border:none;
+	padding:0px 10px;
+	color:var(--dark);
 }
