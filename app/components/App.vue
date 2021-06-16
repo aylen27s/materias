@@ -10,6 +10,7 @@
 				<label> Nota <input type="number" min="1" max="10" class="i-number" v-model="materia.nota"></label>
 				<label> Recuperatorio<input type="checkbox" v-model="materia.recu"></label>
 				<button class="btn">Guardar parcial</button>
+				<small v-if="maxInsert===9">No se pueden insertar mas de 9 notas</small>
 			</form>
 		</div>
 		<div class="section-b">
@@ -19,8 +20,9 @@
 					<p>{{parcial.nroParcial}}° parcial</p>
 				</header>
 				<div>
-					<p class="fecha">{{new Date(parcial.fecha).toLocaleDateString()}}</p>
-					<label>Nota <p class="nota">{{parcial.nota}}</p></label>
+					<p class="fecha">{{new Date(parcial.fecha).toLocaleDateString()/**/}}</p>
+					<label v-if="parcial.nota >0">Nota <p class="nota">{{parcial.nota}}</p></label>
+					<label v-else>Sin rendir</label>
 					<label v-if="parcial.recuperatorio==true" class="recu">Recuperatorio</label>
 					<footer>
 						<button class="btn-icon" @click="remove(parcial.id)"><i class="far fa-trash-alt icon-rmv"></i></button>
@@ -73,18 +75,13 @@
 				parciales: [],
 				edit:false,
 				updId:'',
+				maxInsert:0,
 			}
 		},
 		created(){//se ejecuta al refrescar la pagina
 			this.getParciales()
 		},
 		methods: {
-			/*popUp(id, state){
-				if (state)
-					document.getElementById(id).style.display = "block"
-				else
-					document.getElementById(id).style.display = "none"
-			},*/
 			getParciales(){
 				fetch('/api/materias',{
 					method:'GET',
@@ -94,11 +91,12 @@
 				.then(data => {
 					this.parciales = data
 					console.log('datos obtenidos')
-					console.log(this.parciales)
+					this.maxInsert = this.parciales.length
+					//console.log('cantidad obtenida:',this.parciales.length)
 				})
 			},
 			update(id){
-				this.updId = id;
+				this.updId = id
 				this.edit = !this.edit
 				console.log('Modo PUT :',this.edit)
 				//console.log(id)
@@ -127,7 +125,7 @@
 			},
 			remove(id){
 				console.log(id)
-				 fetch('/api/materias/' + id, {
+				fetch('/api/materias/' + id, {
 					method:'DELETE',
 					headers:header
 				})
@@ -140,39 +138,41 @@
 			},
 			cargarDatos() {
 
-					//this.updMateria.fecha= this.updMateria.fecha.split('-')
-					//console.log(this.updMateria.fecha, typeof(this.materia.fecha))
+				//console.log('editar?: ',this.edit)
+				
+				if(this.edit===false && this.maxInsert <9){
+
+					this.materia.fecha = this.materia.fecha.split('-')
+					fetch('/api/materias',{
+						method: 'POST',
+						body: JSON.stringify(this.materia),
+						headers:header
+					})
+					.then(response => response.json())
+					.then(data => {
+						this.getParciales()
+					})
+					this.materia = new Materia()
+
+				}else if(this.edit){
+					this.updMateria.fecha= this.updMateria.fecha.split('-')
 					console.log('editar?: ',this.edit)
+					console.log(this.updId)
+					console.log(this.updMateria)
+					fetch('/api/materias/'+this.updId,{
+						method: 'PUT',
+						body: JSON.stringify(this.updMateria),
+						headers:header
+					})
+					.then(response => response.json())
+					.then(data => {
+						this.getParciales()
+					})
 
-					if(!this.edit){
-						fetch('/api/materias',{
-							method: 'POST',
-							body: JSON.stringify(this.materia),
-							headers:header
-						})
-						.then(response => response.json())
-						.then(data => {
-							this.getParciales()
-						})
-						this.materia = new Materia()
-					}else{
-						console.log('editar?: ',this.edit)
-						console.log(this.updId)
-						console.log(this.updMateria)
-						fetch('/api/materias/'+this.updId,{
-							method: 'PUT',
-							body: JSON.stringify(this.updMateria),
-							headers:header
-						})
-						.then(response => response.json())
-						.then(data => {
-							this.getParciales()
-						})
-
-						this.updMateria = new Materia()
-						this.updId='';
-						this.edit = false;
-					}
+					this.updMateria = new Materia()
+					this.updId='';
+					this.edit = false;
+				}
 
 			}
 		}

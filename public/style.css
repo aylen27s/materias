@@ -36,6 +36,7 @@
 }
 
 .section-a{
+	min-width: 270px;
 	width: 25vw;
 	height:100%;
 	box-shadow: 0 1px 10px rgba(0,0,0,0.5);
@@ -110,15 +111,18 @@ input[type="date"]{
 	display: grid;
 	grid-template-columns: repeat(3,1fr);
 	grid-gap:20px;
-	padding:50px;
+	height:100vh;
+	padding: 40px 50px;
 	overflow-y: scroll;
 }
 
 .card{
+	min-width:220px;
 	height: 150px;
 	background: white;
 	border-radius: 5px;
-	position:relative
+	position:relative;
+	padding:10px;
 }
 .card header{
 	display: flex;
@@ -225,8 +229,24 @@ input[type="date"]{
 }
 
 .btn.act{
-	background:var(--lt);
+	background:var(--mid);
 	border:none;
 	padding:0px 10px;
-	color:var(--dark);
+	color:#fff;
+	box-shadow:0px 2px 5px rgba(0,0,0,0.3);
+}
+
+.btn.act:hover{
+	transform: translateY(-1px);
+}
+
+small{
+	color:rgb(255, 118, 118);
+	font-size: 0.8em;
+}
+
+@media (max-width:800px){
+	.section-b{
+		grid-template-columns: auto;
+	}
 }

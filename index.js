@@ -41,7 +41,7 @@ app.post('/api/materias', (request, response)=>{
 	if(nombre !== undefined && fecha !== undefined){
 		const nuevaMateria = new Materia({
 		materia : nombre,
-		fecha: new Date(fecha),
+		fecha: new Date(Number(fecha[0]), Number(fecha[1])-1, Number(fecha[2])),
 		nota: Number(nota) || 0,
 		nroParcial: Number(nroParcial)|| 1,
 		recuperatorio: recu || false
@@ -90,7 +90,7 @@ app.put('/api/materias/:id',(req, res)=>{
 	console.log(req.body)
 	Materia.findByIdAndUpdate({_id:id},{
 		"materia" : nombre,
-		"fecha": new Date(fecha),
+		"fecha": new Date(Number(fecha[0]), Number(fecha[1])-1, Number(fecha[2])),
 		"nota": Number(nota),
 		"nroParcial": Number(nroParcial),
 		"recuperatorio": recu
