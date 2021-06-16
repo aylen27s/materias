@@ -73,32 +73,41 @@ app.delete('/api/materias/:id', (request, response)=>{
 		if(Materia.findById({_id:id}).content){
 			console.log('No se pudo borrar el doc')
 			response.status(204).end()
-		}			
+		}
 		else{
 			response.json({
 				status: 'Documento eliminado'
 			})
 		}
-			
+
 	})
 })
 
-app.put('/api/materias/',(req, res)=>{
-	const {id, updName, updDate,updNota,updNroP,updRecu} = req.body
-
+app.put('/api/materias/:id',(req, res)=>{
+	const { id } = req.params
+	const {nombre, fecha, nota, nroParcial,recu} = req.body
+	//const {updName, updDate,updNota,updNroP,updRecu} = req.body
+	console.log(req.body)
 	Materia.findByIdAndUpdate({_id:id},{
-		"materia":updName,
-		"fecha":new Date(updDate),
-		"nota":updNota,
-		"nroParcial":updNroP,
-		"recuperatorio":updRecu
+		"materia" : nombre,
+		"fecha": new Date(fecha),
+		"nota": Number(nota),
+		"nroParcial": Number(nroParcial),
+		"recuperatorio": recu
+		// "materia":updName,
+		// "fecha":new Date(updDate),
+		// "nota":updNota,
+		// "nroParcial":updNroP,
+		// "recuperatorio":updRecu
 	})
 	.then(materia => {
 		console.log('-----Datos actualizados')
 		console.log(materia)
-		res.status(200).end()
+		res.json({
+			status: 'Documento actualizado'
+		})
 	})
-	
+
 
 })
 
