@@ -1,4 +1,4 @@
-https://infinite-basin-92269.herokuapp.com/
+https://parcialitosapp.herokuapp.com/
 
 ❏ App para guardar los parciales y sus notas
 
